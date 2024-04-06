@@ -1,3 +1,5 @@
+[DUCK-NET repository](https://github.com/RazvanDu/DUCK-Net) 를 참조하세요.
+
 # DUCKNet 모델 구현
 
 이 문서는 DUCKNet 모델의 구현에 대한 개요를 제공해요. DUCKNet은 다양한 컨볼루션 블록을 사용하여 이미지의 특징을 추출하고, 이를 통해 이미지 분류, 세그멘테이션 등의 작업을 수행할 수 있는 딥러닝 모델이에요.
