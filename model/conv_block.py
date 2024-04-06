@@ -1,3 +1,4 @@
+import logging
 import torch
 import torch.nn as nn
 
@@ -62,7 +63,7 @@ class DUCKv2Conv2D(nn.Module):
         x6 = self.conv6(x)
         
         x = x1 + x2 + x3 + x4 + x5 + x6
-        print(f"DUCKv2Conv2D: x1: {x1.size()}, x2: {x2.size()}, x3: {x3.size()}, x4: {x4.size()}, x5: {x5.size()}, x6: {x6.size()}, x: {x.size()}")
+        logging.debug(f"DUCKv2Conv2D: x1: {x1.size()}, x2: {x2.size()}, x3: {x3.size()}, x4: {x4.size()}, x5: {x5.size()}, x6: {x6.size()}, x: {x.size()}")
         x = nn.BatchNorm2d(x.size(1))(x)
         x = nn.ReLU()(x)
         return x
