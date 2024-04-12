@@ -1,5 +1,4 @@
 import logging
-import torch
 import torch.nn as nn
 
 class ConvBlock2D(nn.Module):
@@ -39,9 +38,9 @@ class SeparatedConv2D(nn.Module):
         
     def forward(self, x):
         x = self.depthwise(x)
-        x = nn.BatchNorm2d(x.size(1))(x)
+        x = nn.BatchNorm2d(x.size(1)).to(x.device)(x) # x와 같은 디바이스로 BatchNorm2d 레이어를 이동
         x = self.pointwise(x)
-        x = nn.BatchNorm2d(x.size(1))(x)
+        x = nn.BatchNorm2d(x.size(1)).to(x.device)(x)
         return x
 
 class DUCKv2Conv2D(nn.Module):
@@ -64,7 +63,7 @@ class DUCKv2Conv2D(nn.Module):
         
         x = x1 + x2 + x3 + x4 + x5 + x6
         logging.debug(f"DUCKv2Conv2D: x1: {x1.size()}, x2: {x2.size()}, x3: {x3.size()}, x4: {x4.size()}, x5: {x5.size()}, x6: {x6.size()}, x: {x.size()}")
-        x = nn.BatchNorm2d(x.size(1))(x)
+        x = nn.BatchNorm2d(x.size(1)).to(x.device)(x) # x와 같은 디바이스로 BatchNorm2d 레이어를 이동
         x = nn.ReLU()(x)
         return x
 
@@ -76,10 +75,10 @@ class MidScopeConv2D(nn.Module):
 
     def forward(self, x):
         x = self.conv1(x)
-        x = nn.BatchNorm2d(x.size(1))(x)
+        x = nn.BatchNorm2d(x.size(1)).to(x.device)(x) # x와 같은 디바이스로 BatchNorm2d 레이어를 이동
         x = nn.ReLU()(x)
         x = self.conv2(x)
-        x = nn.BatchNorm2d(x.size(1))(x)
+        x = nn.BatchNorm2d(x.size(1)).to(x.device)(x)
         x = nn.ReLU()(x)
         return x
 
@@ -92,13 +91,13 @@ class WideScopeConv2D(nn.Module):
 
     def forward(self, x):
         x = self.conv1(x)
-        x = nn.BatchNorm2d(x.size(1))(x)
+        x = nn.BatchNorm2d(x.size(1)).to(x.device)(x) # x와 같은 디바이스로 BatchNorm2d 레이어를 이동
         x = nn.ReLU()(x)
         x = self.conv2(x)
-        x = nn.BatchNorm2d(x.size(1))(x)
+        x = nn.BatchNorm2d(x.size(1)).to(x.device)(x)
         x = nn.ReLU()(x)
         x = self.conv3(x)
-        x = nn.BatchNorm2d(x.size(1))(x)
+        x = nn.BatchNorm2d(x.size(1)).to(x.device)(x)
         x = nn.ReLU()(x)
         return x
 
@@ -142,10 +141,10 @@ class DoubleConvolutionWithBatchNorm(nn.Module):
         
     def forward(self, x):
         x = self.conv1(x)
-        x = nn.BatchNorm2d(x.size(1))(x)
+        x = nn.BatchNorm2d(x.size(1)).to(x.device)(x) # x와 같은 디바이스로 BatchNorm2d 레이어를 이동
         x = nn.ReLU()(x)
         x = self.conv2(x)
-        x = nn.BatchNorm2d(x.size(1))(x)
+        x = nn.BatchNorm2d(x.size(1)).to(x.device)(x)
         x = nn.ReLU()(x)
         return x
         
